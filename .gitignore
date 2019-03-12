@@ -1,0 +1,9 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+!should-be-private/keystore.jks
+*.p12
+*.key
+*.mobileprovision
+dist/
