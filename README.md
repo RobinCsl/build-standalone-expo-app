@@ -159,7 +159,7 @@ turtle build:ios \
 
 Once the build finishes successfully, you should get the path to your `.ipa` file.
 
-## 6. [Distribute and install]((https://www.robincussol.com/build-standalone-expo-apk-ipa-with-turtle-cli/#6-distribute-and-install))
+## 6. [Distribute and install](https://www.robincussol.com/build-standalone-expo-apk-ipa-with-turtle-cli/#6-distribute-and-install)
 
 ### on Android
 
