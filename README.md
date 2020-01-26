@@ -107,7 +107,7 @@ Make sure that you are serving the `dist` directory on http://127.0.0.1:8000 as 
 EXPO_ANDROID_KEYSTORE_PASSWORD=<KEYSTORE_PASSWORD> \
 EXPO_ANDROID_KEY_PASSWORD=<KEY_PASSWORD> \
 turtle build:android \
-  --type apk
+  --type apk \
   --keystore-path <KEYSTORE_PATH> \
   --keystore-alias <KEYSTORE_ALIAS> \
   --public-url http://127.0.0.1:8000/android-index.json
