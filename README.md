@@ -153,7 +153,7 @@ EXPO_IOS_DIST_P12_PASSWORD=<PASSWORD HERE> \
 turtle build:ios \
   --team-id <YOUR_TEAM_ID> \
   --dist-p12-path </path/to/your/dist/cert.p12> \
-  --provisioning-profile-path </path/to/your/provisioning/profile.mobileprovision>
+  --provisioning-profile-path </path/to/your/provisioning/profile.mobileprovision> \
   --public-url http://127.0.0.1:8000/ios-index.json
 ```
 
