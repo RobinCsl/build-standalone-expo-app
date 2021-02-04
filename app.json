@@ -2,13 +2,6 @@
   "expo": {
     "name": "ExampleApplication",
     "slug": "ExampleApplication",
-    "privacy": "public",
-    "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,7 +21,14 @@
       "bundleIdentifier": "com.example.exampleApplication"
     },
     "android": {
-      "package": "com.example.example_application"
+      "package": "com.example.example_application",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }

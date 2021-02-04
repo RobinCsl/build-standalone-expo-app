@@ -1,7 +1,3 @@
-_This branch corresponds to the [article updated on January 08, 2020](https://www.robincussol.com/build-standalone-expo-apk-ipa-with-turtle-cli/). To see the code corresponding to previous versions of the article, please switch to the branch with the date of the version you're interested in. For example, for the original version published on March 12, 2019, select the branch entitled [2019-03-12](https://github.com/RobinCsl/build-standalone-expo-app/tree/2019-03-12)._
-
----
-
 # Build Standalone Expo .apk and .ipa with Turtle CLI
 
 _This is a condensed version which only shows the commands for each section._
@@ -53,7 +49,7 @@ Add the keys `"bundleIdentifier"` under `"ios"`, and `"package"` under `"android
 Assuming that your local web server will be running on `http://127.0.0.1:8000`, export the app with
 
 ```bash
-$ expo export --public-url http://127.0.0.1:8000
+$ expo export --dev --public-url http://127.0.0.1:8000
 ...
 Export was successful. Your exported files can be found in dist
 ```
@@ -62,11 +58,7 @@ Export was successful. Your exported files can be found in dist
 Serve the `dist` directory on your web server (and make sure it's available at the same URL that you chose for the flag `--public-url` above). For example, run
 
 ```bash
-$ cd dist
-# Assuming Python 3 is installed on your machine
-$ python -m http.server
-# OR
-$ python3 -m http.server
+$ npx http-server -p 8000 dist
 ```
 
 Note: if for some reason you need to re-export your application (because you modified your `app.json` file since the last export, for instance), you must first remove the `dist` directory:
@@ -83,7 +75,7 @@ Verify that your local server is running, e.g.
 
 ```bash
 $ curl http://127.0.0.1:8000/android-index.json
-{"name":"ExampleApplication","slug":"ExampleApplication","privacy":"public","sdkVersion":"36.0.0","platforms":["ios","android","web"],"version":"1.0.0","orientation":"portrait","icon":"./assets/icon.png","splash":{"image":"./assets/splash.png","resizeMode":"contain","backgroundColor":"#ffffff","imageUrl":"http://127.0.0.1:8000/assets/43ec0dcbe5a156bf9e650bb8c15e7af6"},"updates":{"fallbackToCacheTimeout":0},"ios":{"supportsTablet":true,"bundleIdentifier":"com.example.exampleApplication"},"android":{"package":"com.example.example_application"},"locales":{},"iconUrl":"http://127.0.0.1:8000/assets/f82b34f900882c5120a1bfbf6df22a27","bundledAssets":["asset_3a2ba31570920eeb9b1d217cabe58315.ttf","asset_8b12b3e16d591abc926165fa8f760e3b.json","asset_744ce60078c17d86006dd0edabcd59a7.ttf","asset_461d9bba8b6a3c91675039df12cfe6ca.json","asset_140c53a7643ea949007aa9a282153849.ttf","asset_94c4ffdcbffeb0570c635d7f8edd8a25.json","asset_6beba7e6834963f7f171d3bdd075c915.ttf","asset_648f2d510967a87880abfed9476aeb28.json","asset_b06871f281fee6b241d60582ae9369b9.ttf","asset_f1f91feb805137c9283fb766620ec5eb.json","asset_09dd345dbd4ec5a0874841d5749ac153.json","asset_0886a6b127c6057cee83f9c65c7ffd62.json","asset_2e562d4ebf15395f00bc738738f79291.ttf","asset_872545dde71de3842234bf6afe80c4cb.ttf","asset_c6aef942e3668158ec29d4adcb2e768f.ttf","asset_e20945d7c929279ef7a6f1db184a4470.ttf","asset_60668d999bbaf663420340f7bdd580d7.json","asset_b2e0fc821c6886fb3940f85a3320003e.ttf","asset_3e6805fbc794680014716b8c752f20b8.json","asset_5a293a273bee8d740a045d9922b9a9ae.ttf","asset_b582e1c8a605c3b9a1c26e09789a78d4.json","asset_a37b0c01c0baf1888ca812cc0508f6e2.ttf","asset_7e078700f0c35367a56c5bbb2047dda7.json","asset_8e7f807ef943bff1f6d3c2c6e0f3769e.ttf","asset_fdc01171a7a7ea76b187afcd162dee7d.json","asset_d2285965fe34b05465047401b8595dd0.ttf","asset_647543ebfccf6e5495434383598453d1.json","asset_5cdf883b18a5651a29a4d1ef276d2457.ttf","asset_74d124a3caeac2bea111f3ca2f2dd34a.json"],"assetUrlOverride":"./assets","publishedTime":"2020-01-10T08:40:46.255Z","commitTime":"2020-01-10T08:40:46.255Z","revisionId":"XwJm9wdyZw","developer":{"tool":"exp"},"id":"@anonymous/ExampleApplication","bundleUrl":"http://127.0.0.1:8000/bundles/android-180fb088cff97225a61024176ed1af3a.js","platform":"android","dependencies":["expo","react","react-dom","react-native","react-native-web"]}⏎
+{"name":"ExampleApplication","slug":"ExampleApplication","version":"1.0.0","orientation":"portrait","icon":"./assets/icon.png","splash":{"image":"./assets/splash.png","resizeMode":"contain","backgroundColor":"#ffffff","imageUrl":"http://127.0.0.1:8000/assets/201a91bd1740bb1d6a1dbad049310724"}...
 ```
 
 If you know which Expo SDK version you are going to use, you can run
@@ -110,16 +102,16 @@ turtle build:android \
   --type apk \
   --keystore-path <KEYSTORE_PATH> \
   --keystore-alias <KEYSTORE_ALIAS> \
+  --allow-non-https-public-url \
   --public-url http://127.0.0.1:8000/android-index.json
 ```
 
 Once the build finishes, take note of the location of your build `.apk` file. For example,
 
 ```bash
-Jan 9 22:38:42 turtle[76552] INFO:  copying build to fake upload directory
+Feb 5 08:34:22 turtle[11626] INFO:  copied build to ~/expo-apps/@anonymous__ExampleApplication-6d7e1749c5b64bd0851525b0c7eec780-signed.apk
   platform: "android"
   buildPhase: "copying build artifact"
-Jan 9 22:38:42 turtle[76552] INFO:  copied build to ~/expo-apps/@anonymous\ExampleApplication-9be976cea1fb4651a6fa04d8432873eb-signed.apk
 ```
 
 
@@ -130,7 +122,7 @@ First, verify that your local server is running, e.g.
 
 ```bash
 $ curl http://127.0.0.1:8000/ios-index.json
-{"name":"ExampleApplication","slug":"ExampleApplication","privacy":"public","sdkVersion":"36.0.0","platforms":["ios","android","web"],"version":"1.0.0","orientation":"portrait","icon":"./assets/icon.png","splash":{"image":"./assets/splash.png","resizeMode":"contain","backgroundColor":"#ffffff","imageUrl":"http://127.0.0.1:8000/assets/43ec0dcbe5a156bf9e650bb8c15e7af6"},"updates":{"fallbackToCacheTimeout":0},"ios":{"supportsTablet":true,"bundleIdentifier":"com.example.exampleApplication"},"android":{"package":"com.example.example_application"},"locales":{},"iconUrl":"http://127.0.0.1:8000/assets/f82b34f900882c5120a1bfbf6df22a27","bundledAssets":["asset_3a2ba31570920eeb9b1d217cabe58315.ttf","asset_8b12b3e16d591abc926165fa8f760e3b.json","asset_744ce60078c17d86006dd0edabcd59a7.ttf","asset_461d9bba8b6a3c91675039df12cfe6ca.json","asset_140c53a7643ea949007aa9a282153849.ttf","asset_94c4ffdcbffeb0570c635d7f8edd8a25.json","asset_6beba7e6834963f7f171d3bdd075c915.ttf","asset_648f2d510967a87880abfed9476aeb28.json","asset_b06871f281fee6b241d60582ae9369b9.ttf","asset_f1f91feb805137c9283fb766620ec5eb.json","asset_09dd345dbd4ec5a0874841d5749ac153.json","asset_0886a6b127c6057cee83f9c65c7ffd62.json","asset_2e562d4ebf15395f00bc738738f79291.ttf","asset_872545dde71de3842234bf6afe80c4cb.ttf","asset_c6aef942e3668158ec29d4adcb2e768f.ttf","asset_e20945d7c929279ef7a6f1db184a4470.ttf","asset_60668d999bbaf663420340f7bdd580d7.json","asset_b2e0fc821c6886fb3940f85a3320003e.ttf","asset_3e6805fbc794680014716b8c752f20b8.json","asset_5a293a273bee8d740a045d9922b9a9ae.ttf","asset_b582e1c8a605c3b9a1c26e09789a78d4.json","asset_a37b0c01c0baf1888ca812cc0508f6e2.ttf","asset_7e078700f0c35367a56c5bbb2047dda7.json","asset_8e7f807ef943bff1f6d3c2c6e0f3769e.ttf","asset_fdc01171a7a7ea76b187afcd162dee7d.json","asset_d2285965fe34b05465047401b8595dd0.ttf","asset_647543ebfccf6e5495434383598453d1.json","asset_5cdf883b18a5651a29a4d1ef276d2457.ttf","asset_74d124a3caeac2bea111f3ca2f2dd34a.json"],"assetUrlOverride":"./assets","publishedTime":"2020-01-10T08:40:46.255Z","commitTime":"2020-01-10T08:40:46.255Z","revisionId":"XwJm9wdyZw","developer":{"tool":"exp"},"id":"@anonymous/ExampleApplication","bundleUrl":"http://127.0.0.1:8000/bundles/ios-404585eb9ae529b61ed72e5df8a757ad.js","platform":"ios"}⏎
+{"name":"ExampleApplication","slug":"ExampleApplication","version":"1.0.0","orientation":"portrait","icon":"./assets/icon.png","splash":{"image":"./assets/splash.png","resizeMode":"contain","backgroundColor":"#ffffff","imageUrl":"http://127.0.0.1:8000/assets/201a91bd1740bb1d6a1dbad049310724"...
 ```
 
 If you know which Expo SDK version you are going to use, you can run
@@ -154,6 +146,7 @@ turtle build:ios \
   --team-id <YOUR_TEAM_ID> \
   --dist-p12-path </path/to/your/dist/cert.p12> \
   --provisioning-profile-path </path/to/your/provisioning/profile.mobileprovision> \
+  --allow-non-https-public-url \
   --public-url http://127.0.0.1:8000/ios-index.json
 ```
 
@@ -194,9 +187,10 @@ I hope this was helpful. If you have any questions or comments, please drop me a
 
 - Expo: https://expo.io
 - Turtle CLI: https://github.com/expo/turtle#readme
-- Configuring `app.json`: https://docs.expo.io/versions/latest/workflow/configuration
-- Expo docs to configure CI with Turtle CLI: https://docs.expo.io/versions/latest/distribution/turtle-cli
-- Expo docs to host application on your own servers: https://docs.expo.io/versions/latest/distribution/hosting-your-app/
+- Expo's guide to Building Standalone apps: https://docs.expo.io/distribution/building-standalone-apps/
+- Configuring `app.json`: https://docs.expo.io/workflow/configuration
+- Expo docs to configure CI with Turtle CLI: https://docs.expo.io/distribution/turtle-cli
+- Expo docs to host application on your own servers: https://docs.expo.io/distribution/hosting-your-app/
 - How to create a keystore for Android: https://developer.android.com/studio/publish/app-signing#generate-key
 - Supporting GitHub repository: https://github.com/RobinCsl/build-standalone-expo-app/
 
