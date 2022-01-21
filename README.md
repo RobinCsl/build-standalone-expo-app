@@ -185,15 +185,15 @@ I hope this was helpful. If you have any questions or comments, please drop me a
 
 ## Resources
 
-- Expo: https://expo.io
+- Expo: https://expo.dev
 - Turtle CLI: https://github.com/expo/turtle#readme
-- Expo's guide to Building Standalone apps: https://docs.expo.io/distribution/building-standalone-apps/
-- Configuring `app.json`: https://docs.expo.io/workflow/configuration
-- Expo docs to configure CI with Turtle CLI: https://docs.expo.io/distribution/turtle-cli
-- Expo docs to host application on your own servers: https://docs.expo.io/distribution/hosting-your-app/
+- Expo's guide to Building Standalone apps: https://docs.expo.dev/classic/building-standalone-apps/
+- Configuring `app.json`: https://docs.expo.dev/workflow/configuration/
+- Expo docs to configure CI with Turtle CLI: https://docs.expo.dev/classic/turtle-cli/
+- Expo docs to host application on your own servers: https://docs.expo.dev/distribution/hosting-your-app/
 - How to create a keystore for Android: https://developer.android.com/studio/publish/app-signing#generate-key
 - Supporting GitHub repository: https://github.com/RobinCsl/build-standalone-expo-app/
 
-[1]: https://expo.io
+[1]: https://expo.dev
 [2]: https://github.com/expo/turtle#readme
 [3]: https://developer.android.com/studio/publish/app-signing#generate-key
